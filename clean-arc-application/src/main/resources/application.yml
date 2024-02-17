@@ -1,0 +1,45 @@
+server:
+  port: 9092
+
+spring:
+  application:
+    name: clean-arc-app
+  data:
+    mongodb:
+      auto-index-creation: true
+      database: clean-arc-example
+      port: 27016
+  mvc:
+    throw-exception-if-no-handler-found: true
+  main:
+    allow-bean-definition-overriding: true
+
+
+foodtechlab:
+  build:
+    version: 1.0.0
+  security:
+    jwt:
+      secret: cleanArcBackendExample1234567890
+    secretWord: cleanArcBackendExample1234567890
+    username: microservice
+    password: cleanArcConnectPassword
+  infrastructure:
+    microservice:
+      auth-service:
+        url: http://localhost:9090
+      sms:
+        url: http://localhost:9091
+logging:
+  file:
+    name: ./log.log
+
+#Конфигурация документации Swagger
+springdoc:
+  packagesToScan: com.campus
+  pathsToMatch: /api/**, /not-secure/**
+
+#Принудительно отключаем старую версию работы с конфигурацией, что бы избежать конфликтов
+springfox:
+  documentation:
+    enabled: false
